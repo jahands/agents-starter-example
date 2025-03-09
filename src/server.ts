@@ -21,6 +21,7 @@ import { AsyncLocalStorage } from "node:async_hooks";
 // Environment variables type definition
 export type Env = {
   OPENAI_API_KEY: string;
+  GATEWAY_BASE_URL: string;
   Chat: AgentNamespace<Chat>;
 };
 
@@ -51,15 +52,15 @@ export class Chat extends AIChatAgent<Env> {
           });
 
           // Initialize OpenAI client with API key from environment
-          const openai = createOpenAI({
-            apiKey: this.env.OPENAI_API_KEY,
-          });
-
-          // Cloudflare AI Gateway
           // const openai = createOpenAI({
           //   apiKey: this.env.OPENAI_API_KEY,
-          //   baseURL: this.env.GATEWAY_BASE_URL,
           // });
+
+          // Cloudflare AI Gateway
+          const openai = createOpenAI({
+            apiKey: this.env.OPENAI_API_KEY,
+            baseURL: this.env.GATEWAY_BASE_URL,
+          });
 
           // Stream the AI response using GPT-4
           const result = streamText({
