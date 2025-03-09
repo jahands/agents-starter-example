@@ -13,6 +13,9 @@
 	"assets": {
 		"directory": "public"
 	},
+	"workers_dev": false,
+	"preview_urls": false,
+	"routes": ["agent.uuid.rocks/*"],
 	"durable_objects": {
 		"bindings": [
 			{
